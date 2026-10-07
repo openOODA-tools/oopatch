@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oopatch-bin
+_pkgname=oopatch
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Capability-bounded unified diff applier with fuzz factor and reverse rollback."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oopatch"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oopatch')
+conflicts=('oopatch')
+source_x86_64=("${url}/releases/download/v${pkgver}/oopatch-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oopatch-linux-x86_64" "${pkgdir}/usr/bin/oopatch"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oopatch-uninstall"
+}
